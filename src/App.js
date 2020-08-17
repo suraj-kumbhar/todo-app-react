@@ -1,24 +1,46 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
+import { Button, InputLabel, Input, FormControl } from '@material-ui/core';
+import Todo from './components/Todo';
 
 function App() {
+  const [todos, setTodos] = useState([
+    'Take dogs for a walk',
+    'Take the rubbish out',
+  ]);
+  const [input, setInput] = useState('');
+
+  console.log(input);
+
+  const addTodo = (e) => {
+    e.preventDefault();
+    setTodos([...todos, input]);
+    setInput('');
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Todo App 🚀</h1>
+      <form>
+        <FormControl>
+          <InputLabel>✅ Write a todo</InputLabel>
+          <Input value={input} onChange={(e) => setInput(e.target.value)} />
+          <Button
+            disabled={!input}
+            type="submit"
+            onClick={addTodo}
+            variant="contained"
+            color="primary"
+          >
+            Add Todo
+          </Button>
+        </FormControl>
+      </form>
+      <ul>
+        {todos.map((todo) => (
+          <Todo todo={todo} />
+        ))}
+      </ul>
     </div>
   );
 }

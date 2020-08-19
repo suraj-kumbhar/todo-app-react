@@ -6,9 +6,8 @@ function Todo(props) {
   return (
     <List className="todo__list">
       <ListItem>
-        <ListItemText primary="Todo" secondary={props.todo} />
+        <ListItemText primary={props.todo} secondary="Demo Deadline ⏰" />
       </ListItem>
-      {/* <li>{props.todo}</li> */}
     </List>
   );
 }

@@ -4,13 +4,15 @@ import {
   ListItem,
   ListItemText,
   Button,
-  ListItemAvatar,
   Modal,
   Input,
+  FormControl,
+  InputLabel,
 } from '@material-ui/core';
 import './Todo.css';
 import { db } from '../firebase';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
+import EditIcon from '@material-ui/icons/Edit';
 import { makeStyles } from '@material-ui/core/styles';
 import firebase from 'firebase';
 
@@ -31,9 +33,10 @@ const useStyles = makeStyles((theme) => ({
 function Todo(props) {
   const [open, setOpen] = useState(false);
   const classes = useStyles();
-  const [input, setInput] = useState();
+  const [input, setInput] = useState('');
 
-  const updateTodo = () => {
+  const updateTodo = (e) => {
+    e.preventDefault();
     db.collection('todos').doc(props.todo.id).set(
       {
         todo: input,
@@ -47,31 +50,38 @@ function Todo(props) {
   return (
     <>
       <Modal open={open} onClose={(e) => setOpen(false)}>
-        <div className={classes.paper}>
-          <Input
-            value={input}
-            placeholder={props.todo.todo}
-            onChange={(e) => setInput(e.target.value)}
-          />
-          <Button onClick={updateTodo}>Update Todo</Button>
-        </div>
+        <form className={classes.paper}>
+          <div className="todo__form">
+            <FormControl>
+              <InputLabel>✅ Edit the todo</InputLabel>
+              <Input value={input} onChange={(e) => setInput(e.target.value)} />
+            </FormControl>
+
+            <Button
+              onClick={updateTodo}
+              disabled={!input}
+              type="submit"
+              variant="contained"
+              color="primary"
+            >
+              Update
+            </Button>
+          </div>
+        </form>
       </Modal>
       <List className="todo__list">
-        <ListItem>
-          <ListItemText
-            primary={props.todo.todo}
-            secondary="Demo Deadline ⏰"
-          />
+        <ListItem className="todo__listContent">
+          <ListItemText primary={`⏰ ${props.todo.todo}`} secondary={``} />
         </ListItem>
-        <Button
+        <EditIcon
+          className="todo__edit"
           onClick={(e) => {
             setOpen(true);
             setInput(props.todo.todo);
           }}
-        >
-          EDIT ME
-        </Button>
+        />
         <DeleteForeverIcon
+          className="todo__delete"
           onClick={(e) => db.collection('todos').doc(props.todo.id).delete()}
         />
       </List>

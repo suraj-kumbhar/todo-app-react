@@ -30,11 +30,15 @@ function App() {
 
   return (
     <div className="App">
-      <h1>Todo App 🚀</h1>
+      <h1>🚀 Todo App 🚀</h1>
       <form className="app__form">
         <FormControl>
           <InputLabel>✅ Write a todo</InputLabel>
-          <Input value={input} onChange={(e) => setInput(e.target.value)} />
+          <Input
+            className="app__input"
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+          />
         </FormControl>
         <Button
           disabled={!input}
@@ -43,7 +47,7 @@ function App() {
           variant="contained"
           color="primary"
         >
-          Add Todo
+          Add
         </Button>
       </form>
       <ul className="app__list">

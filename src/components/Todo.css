@@ -1,4 +1,29 @@
 .todo__list {
   /* background-color: blue; */
   display: flex;
+  padding: 10px !important;
+  justify-content: center;
+  align-items: center;
+  margin: 10px !important;
+  border: 1px solid #a6b7be;
+  border-radius: 5px;
+  background-color: #f8f9fe;
+}
+
+.todo__listContent {
+  padding: 10px !important;
+}
+
+.todo__delete {
+  padding: 10px;
+}
+
+.todo__edit {
+  padding: 10px;
+}
+
+.todo__form {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
 }

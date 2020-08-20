@@ -13,3 +13,7 @@
   list-style: none;
   padding: 10px;
 }
+
+.app__input {
+  margin-right: 10px;
+}
